@@ -22,6 +22,25 @@ Because who said browser utilities can't have a sense of humor?
 | ↻ Time Machine | Keep your cookies fresher than a just-dropped mixtape |
 | 📊 Cookie Museum | Showcase your collection like fine art |
 
+## Screenshots
+
+Feast your eyes on these delectable views of Unserious CM in action!
+
+### View Cookies: The Great Cookie Stakeout
+![View Cookies](screenshots/1.png)
+
+*Witness the cookie surveillance in action! No cookie can hide from our all-seeing eye!*
+
+### Set Cookies: The Cookie Bakery
+![Set Cookies](screenshots/2.png)
+
+*Welcome to our state-of-the-art cookie creation lab. Bake digital delights with a click!*
+
+### Cookie Jar: The Museum of Tiny Treasures
+![Cookie Jar](screenshots/3.png)
+
+*Behold the grand exhibition of your cookie collection. Each one a masterpiece!*
+
 ## Quick Start
 
 ```bash
@@ -81,7 +100,7 @@ Fork, bake, and serve your improvements! We're always hungry for new features.
 
 ## Version
 
-Current version: [0.0.1](https://github.com/mra1k3r0/unserious-cm/releases/tag/v0.0.1) (We're just getting started!)
+Current version: [v0.0.1](https://github.com/mra1k3r0/unserious-cm/releases/tag/v0.0.1) (We're just getting started!)
 
 ---
 
@@ -93,3 +112,4 @@ Current version: [0.0.1](https://github.com/mra1k3r0/unserious-cm/releases/tag/v
 Baked with ❤️ by [mra1k3r0](https://github.com/mra1k3r0)
 
 *Remember: A cookie a day keeps the boring extensions away!*
+

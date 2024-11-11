@@ -1,7 +1,7 @@
 /**
  * @fileoverview Background script for Unserious Cookie Manager Chrome Extension
  * @author John Paul Caigas (mra1k3r0) <github.com/mra1k3r0>
- * 
+ *
  * This script handles message passing between the extension's popup and the browser,
  * managing cookie operations such as getting, setting, and deleting cookies.
  */
@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
    * @param {string} origin - The origin URL of the current tab
    */
   const handleGetCookies = (origin: string) => {
-    chrome.cookies.getAll({ url: origin }, (cookies) => {
+    chrome.cookies.getAll({ url: origin }, cookies => {
       sendResponse(cookies);
     });
   };
@@ -24,8 +24,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
    */
   const handleSetCookies = (origin: string, cookieString: string) => {
     // First, remove all existing cookies
-    chrome.cookies.getAll({ url: origin }, (existingCookies) => {
-      existingCookies.forEach((cookie) => {
+    chrome.cookies.getAll({ url: origin }, existingCookies => {
+      existingCookies.forEach(cookie => {
         chrome.cookies.remove({
           url: origin,
           name: cookie.name,
@@ -54,8 +54,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
    * @param {string} origin - The origin URL of the current tab
    */
   const handleDeleteAllCookies = (origin: string) => {
-    chrome.cookies.getAll({ url: origin }, (cookies) => {
-      cookies.forEach((cookie) => {
+    chrome.cookies.getAll({ url: origin }, cookies => {
+      cookies.forEach(cookie => {
         chrome.cookies.remove({
           url: origin,
           name: cookie.name,
@@ -66,7 +66,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   };
 
   // Get the current tab's URL
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     const url = tabs[0].url ? new URL(tabs[0].url) : null;
     if (url) {
       switch (request.action) {

@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Unserious CM",
   "version": "0.0.1",
-  "description": "A delightfully whimsical cookie manager that brings a touch of fun to your browsing experience!",
+  "description": "A not-so-serious Cookie Manager Chrome extension",
   "permissions": [
     "activeTab",
     "cookies",

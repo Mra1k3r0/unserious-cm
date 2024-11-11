@@ -1,7 +1,7 @@
 /**
  * @fileoverview Unserious Cookie Manager (CM) Chrome Extension
  * @author John Paul Caigas (mra1k3r0) <github.com/mra1k3r0>
- * 
+ *
  * A delightfully whimsical cookie manager that brings a touch of fun to browser cookie management.
  * Built with React, TypeScript, and a sprinkle of humor, this extension makes cookie management
  * less of a chore and more of a treat. Features include cookie viewing, setting, and deletion
@@ -16,17 +16,17 @@ import { Textarea } from './components/ui/textarea';
 // import { Input } from './components/ui/input';
 // import { Checkbox } from './components/ui/checkbox';
 // import { Label } from './components/ui/label';
-import { 
-  Copy, 
-  ClipboardPaste, 
-  Trash2, 
-  ExternalLink, 
-  Cookie, 
-  RefreshCw, 
-  Download, 
-  Upload, 
-  ChevronRight, 
-  ChevronLeft 
+import {
+  Copy,
+  ClipboardPaste,
+  Trash2,
+  ExternalLink,
+  Cookie,
+  RefreshCw,
+  Download,
+  Upload,
+  ChevronRight,
+  ChevronLeft,
 } from 'lucide-react';
 import { useToast, Toaster } from './components/ui/use-toast';
 import {
@@ -46,7 +46,7 @@ type Cookie = {
 const tabVariants = {
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  exit: { opacity: 0, y: -10, transition: { duration: 0.3 } }
+  exit: { opacity: 0, y: -10, transition: { duration: 0.3 } },
 };
 
 export default function Component() {
@@ -74,7 +74,7 @@ export default function Component() {
       if (chrome.runtime.lastError) {
         console.error(chrome.runtime.lastError);
         toast({
-          variant: "destructive",
+          variant: 'destructive',
           title: 'Error',
           description: 'Failed to load cookies. Did they crumble?',
         });
@@ -84,7 +84,7 @@ export default function Component() {
       if ('error' in response) {
         console.error(response.error);
         toast({
-          variant: "destructive",
+          variant: 'destructive',
           title: 'Error',
           description: response.error,
         });
@@ -92,7 +92,7 @@ export default function Component() {
       }
 
       setCookies(response);
-      const cookieString = response.map((cookie) => `${cookie.name}=${cookie.value}`).join('; ');
+      const cookieString = response.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
       setCookieString(cookieString);
     });
   };
@@ -104,7 +104,7 @@ export default function Component() {
   const handleRefreshCookies = () => {
     loadCookies();
     toast({
-      variant: "success",
+      variant: 'success',
       title: 'Cookies Refreshed',
       description: "We've checked the cookie jar for fresh ones!",
     });
@@ -120,7 +120,7 @@ export default function Component() {
     e.preventDefault();
     if (!inputCookies.trim()) {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: 'Empty Cookie Jar',
         description: "You can't bake cookies without ingredients! Please add some cookie data.",
       });
@@ -128,11 +128,11 @@ export default function Component() {
     }
     const message = { action: 'setCookies', cookies: inputCookies };
 
-    chrome.runtime.sendMessage(message, (response: { success: boolean, error?: string }) => {
+    chrome.runtime.sendMessage(message, (response: { success: boolean; error?: string }) => {
       if (chrome.runtime.lastError) {
         console.error(chrome.runtime.lastError);
         toast({
-          variant: "destructive",
+          variant: 'destructive',
           title: 'Cookie Setting Failed',
           description: "Oops! We couldn't set the cookies. Maybe they're too crunchy?",
         });
@@ -140,7 +140,7 @@ export default function Component() {
       }
       if (response.success) {
         toast({
-          variant: "success",
+          variant: 'success',
           title: 'Cookies Set Successfully',
           description: 'Your new cookies are baked and ready to go!',
         });
@@ -148,9 +148,10 @@ export default function Component() {
         setInputCookies('');
       } else {
         toast({
-          variant: "destructive",
+          variant: 'destructive',
           title: 'Cookie Setting Failed',
-          description: response.error || 'Something went wrong. Did you forget the secret ingredient?',
+          description:
+            response.error || 'Something went wrong. Did you forget the secret ingredient?',
         });
       }
     });
@@ -163,11 +164,11 @@ export default function Component() {
   const handleDeleteAllCookies = () => {
     const message = { action: 'deleteAllCookies' };
 
-    chrome.runtime.sendMessage(message, (response: { success: boolean, error?: string }) => {
+    chrome.runtime.sendMessage(message, (response: { success: boolean; error?: string }) => {
       if (chrome.runtime.lastError) {
         console.error(chrome.runtime.lastError);
         toast({
-          variant: "destructive",
+          variant: 'destructive',
           title: 'Cookie Deletion Failed',
           description: "We couldn't clear the cookies. They're putting up a fight!",
         });
@@ -175,16 +176,17 @@ export default function Component() {
       }
       if (response.success) {
         toast({
-          variant: "success",
+          variant: 'success',
           title: 'Cookies Cleared',
           description: 'All cookies have been eaten... err, deleted successfully!',
         });
         loadCookies();
       } else {
         toast({
-          variant: "destructive",
+          variant: 'destructive',
           title: 'Cookie Deletion Failed',
-          description: response.error || 'Something went wrong. The cookie monster might be involved.',
+          description:
+            response.error || 'Something went wrong. The cookie monster might be involved.',
         });
       }
     });
@@ -198,14 +200,14 @@ export default function Component() {
     try {
       await navigator.clipboard.writeText(cookieString);
       toast({
-        variant: "success",
+        variant: 'success',
         title: 'Cookies Copied',
         description: "Cookie recipe is now in your clipboard! Don't eat it!",
       });
     } catch (err) {
       console.error('Failed to copy cookies: ', err);
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: 'Copy Failed',
         description: "We couldn't copy the cookies. They're too delicious to duplicate!",
       });
@@ -221,14 +223,14 @@ export default function Component() {
       const text = await navigator.clipboard.readText();
       setInputCookies(text);
       toast({
-        variant: "success",
+        variant: 'success',
         title: 'Cookies Pasted',
         description: 'Cookie dough has been pasted from your clipboard. Ready to bake!',
       });
     } catch (err) {
       console.error('Failed to read clipboard contents: ', err);
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: 'Paste Failed',
         description: "We couldn't paste from the clipboard. Is it covered in cookie crumbs?",
       });
@@ -250,7 +252,7 @@ export default function Component() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     toast({
-      variant: "success",
+      variant: 'success',
       title: 'Cookies Downloaded',
       description: 'Your cookie recipe has been saved for future baking sessions!',
     });
@@ -266,11 +268,11 @@ export default function Component() {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         const content = e.target?.result as string;
         setInputCookies(content);
         toast({
-          variant: "success",
+          variant: 'success',
           title: 'Cookies Imported',
           description: 'Your cookie recipe has been loaded. Ready to bake!',
         });
@@ -299,13 +301,15 @@ export default function Component() {
   };
 
   return (
-    <div className={`relative ${isExpanded ? 'w-[600px]' : 'w-[400px]'} transition-all duration-300 ease-in-out p-4 bg-background`}>
+    <div
+      className={`relative ${isExpanded ? 'w-[600px]' : 'w-[400px]'} transition-all duration-300 ease-in-out p-4 bg-background`}
+    >
       <Button
         variant="outline"
         size="icon"
         className="absolute -left-6 top-1/2 transform -translate-y-1/2"
         onClick={toggleExpand}
-        aria-label={isExpanded ? "Collapse extension" : "Expand extension"}
+        aria-label={isExpanded ? 'Collapse extension' : 'Expand extension'}
       >
         {isExpanded ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
       </Button>
@@ -350,22 +354,43 @@ export default function Component() {
                 <div className="flex justify-between items-center mb-2">
                   <h2 className="text-lg font-semibold">Current Cookies</h2>
                   <div className="flex space-x-2">
-                    <Button variant="outline" size="icon" onClick={handleRefreshCookies} aria-label="Refresh cookies">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={handleRefreshCookies}
+                      aria-label="Refresh cookies"
+                    >
                       <RefreshCw className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon" onClick={handleCopy} aria-label="Copy cookies">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={handleCopy}
+                      aria-label="Copy cookies"
+                    >
                       <Copy className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon" onClick={handleDownload} aria-label="Download cookies">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={handleDownload}
+                      aria-label="Download cookies"
+                    >
                       <Download className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
                 <div className="flex-grow overflow-y-auto">
-                  <p className="text-sm break-all">{cookieString || 'No cookies found. Did you eat them all?'}</p>
+                  <p className="text-sm break-all">
+                    {cookieString || 'No cookies found. Did you eat them all?'}
+                  </p>
                 </div>
               </div>
-              <Button variant="destructive" className="mt-4 w-full" onClick={handleDeleteAllCookies}>
+              <Button
+                variant="destructive"
+                className="mt-4 w-full"
+                onClick={handleDeleteAllCookies}
+              >
                 <Trash2 className="h-4 w-4 mr-2" />
                 Eat All Cookies
               </Button>
@@ -375,10 +400,22 @@ export default function Component() {
                 <div className="flex justify-between items-center mb-2">
                   <h2 className="text-lg font-semibold">Bake New Cookies</h2>
                   <div className="flex space-x-2">
-                    <Button type="button" variant="outline" size="icon" onClick={handlePaste} aria-label="Paste cookies">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      onClick={handlePaste}
+                      aria-label="Paste cookies"
+                    >
                       <ClipboardPaste className="h-4 w-4" />
                     </Button>
-                    <Button type="button" variant="outline" size="icon" onClick={triggerFileInput} aria-label="Upload cookies">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      onClick={triggerFileInput}
+                      aria-label="Upload cookies"
+                    >
                       <Upload className="h-4 w-4" />
                     </Button>
                     <input
@@ -393,10 +430,12 @@ export default function Component() {
                 <Textarea
                   placeholder="Enter cookie recipe (name=value; name2=value2;)"
                   value={inputCookies}
-                  onChange={(e) => setInputCookies(e.target.value)}
+                  onChange={e => setInputCookies(e.target.value)}
                   className="min-h-[100px]"
                 />
-                <Button type="submit" className="mt-4 w-full">Bake Cookies</Button>
+                <Button type="submit" className="mt-4 w-full">
+                  Bake Cookies
+                </Button>
               </form>
             </TabsContent>
             <TabsContent value="table" className="mt-4">
