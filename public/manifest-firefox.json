@@ -1,0 +1,42 @@
+{
+  "manifest_version": 2,
+  "name": "Unserious CM",
+  "version": "0.0.1",
+  "description": "A delightfully whimsical cookie manager that brings a touch of fun to your browsing experience!",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "storage",
+    "tabs",
+    "webNavigation",
+    "clipboardRead",
+    "clipboardWrite",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Unserious Cookie Manager",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{unserious-cm@example.com}"
+    }
+  }
+}
